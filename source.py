@@ -132,14 +132,14 @@ def is_pc_alive():
 
     def is_gogg_done(): # Function to see if The Shadow Gogg is still attacking while PC is dead
         try:
-            pyautogui.locateOnScreen('images/3 - death event images/next.png')
+            pyautogui.locateOnScreen('images/3 - death event images/next.png', confidence=0.95)
         except pyautogui.ImageNotFoundException:
             return True
         else:
             return False
 
     try:
-        pyautogui.locateOnScreen('images/3 - death event images/pc_dead.png', confidence=0.99)
+        pyautogui.locateOnScreen('images/3 - death event images/pc_dead.png')
     except pyautogui.ImageNotFoundException:
         print('PC is alive.')
         return True
@@ -152,7 +152,7 @@ def is_pc_alive():
 
 def is_image_found(path):
         try:
-            pyautogui.locateOnScreen(path)
+            pyautogui.locateOnScreen(path, confidence=0.9)
         except pyautogui.ImageNotFoundException:
             print('Image not found!')
             return False
