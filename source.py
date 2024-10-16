@@ -118,7 +118,7 @@ def find_and_press(path, countOverride=0):
 # Checks to see if the monster is dead.
 def is_gogg_alive():
     try:
-        pyautogui.locateOnScreen('images/1 - main loop images/hp_0.png', confidence=0.99)
+        pyautogui.locateOnScreen('images/1 - main loop images/hp_0.png', confidence=1)
     except pyautogui.ImageNotFoundException:
         print('The Shadow Gogg lives!')
         return True
@@ -131,7 +131,7 @@ def is_pc_alive():
 
     def is_gogg_done(): # Function to see if The Shadow Gogg is still attacking while PC is dead
         try:
-            pyautogui.locateOnScreen('images/3 - death event images/next.png', confidence=0.95)
+            pyautogui.locateOnScreen('images/3 - death event images/next.png', confidence=1)
         except pyautogui.ImageNotFoundException:
             return True
         else:
