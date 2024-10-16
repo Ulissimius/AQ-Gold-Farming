@@ -28,8 +28,9 @@ def farming_loop():
         # My House screen: click visit neighbor -> (IR) click again to focus -> Ctrl + V -> click specific neighbor
         print('My House')
         find_and_press(filePathMain + 'visit_neighbor_button.png')
-        pyautogui.click() # Click once to focus the text box on the first pass
-        pyautogui.write('45387657', interval=0.01) # This is the neighbor code
+        if is_image_found(filePathMain + 'text_box.png'): # Preventative for pasting house code in incorrect spots.
+            pyautogui.click() # Click once to focus the text box on the first pass
+            pyautogui.write('45387657', interval=0.01) # Type the neighbor code
         find_and_press(filePathMain + 'travel_to_neighbor_button.png')
 
         # Battle Screen: (IR) buff and overdrive -> click attack -> click attack/click done -> click done
@@ -118,7 +119,7 @@ def find_and_press(path, countOverride=0):
 # Checks to see if the monster is dead.
 def is_gogg_alive():
     try:
-        pyautogui.locateOnScreen('images/1 - main loop images/hp_0.png', confidence=1)
+        pyautogui.locateOnScreen('images/1 - main loop images/hp_0.png')
     except pyautogui.ImageNotFoundException:
         print('The Shadow Gogg lives!')
         return True
@@ -131,7 +132,7 @@ def is_pc_alive():
 
     def is_gogg_done(): # Function to see if The Shadow Gogg is still attacking while PC is dead
         try:
-            pyautogui.locateOnScreen('images/3 - death event images/next.png', confidence=1)
+            pyautogui.locateOnScreen('images/3 - death event images/next.png')
         except pyautogui.ImageNotFoundException:
             return True
         else:
@@ -148,6 +149,16 @@ def is_pc_alive():
             print('The Shadow Gogg is still brutalizing you, please hold...')
         print('The Shadow Gogg has allowed you to perish.\nOh no, you\'ve died!')
         return False
+
+def is_image_found(path):
+        try:
+            pyautogui.locateOnScreen(path)
+        except pyautogui.ImageNotFoundException:
+            print('Image not found!')
+            return False
+        else:
+            print('Image found!')
+            return True
 
 # Set hotkeys for starting and stopping
 keyboard.add_hotkey('F7', resume_farming)  # Press F7 to start without buffs
