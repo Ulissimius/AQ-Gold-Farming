@@ -22,7 +22,7 @@ def farming_loop():
     while running:
         # Start - Home screen: click fountain -> click Home button
         print("Home Screen")
-        find_and_press(filePathMain + 'fountain.png')
+        seasonal_fountain(filePathMain) # Checks for different variations of the healing fountain.
         find_and_press(filePathMain + 'to_house_button.png')
 
         # My House screen: click visit neighbor -> (IR) click again to focus -> Ctrl + V -> click specific neighbor
@@ -159,6 +159,15 @@ def is_image_found(path):
         else:
             print('Image found!')
             return True
+        
+def seasonal_fountain(path):
+    time.sleep(0.25) # Padding for loading screen
+    if is_image_found(path + 'fountain_normal.png'):
+        return find_and_press(path + 'fountain_normal.png')
+    elif is_image_found(path + 'fountain_october.png'):
+        return find_and_press(path + 'fountain_october.png')
+    else:
+        return print('Fountain not found!')
 
 # Set hotkeys for starting and stopping
 keyboard.add_hotkey('F7', resume_farming)  # Press F7 to start without buffs
